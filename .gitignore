@@ -20,8 +20,6 @@
 # VS Code settings and files
 .vscode/
 
-# Go module files
-go.sum
 
 # Dependencies
 /vendor/

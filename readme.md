@@ -102,17 +102,108 @@ curl -X POST http://localhost:8080/contacts \
   }'
 ```
 
+#### GET /contacts
+**Description:** Gets all contact.
+
+**Response:**
+
+- `200 OK`: Fetched list of contacts
+
+**Example Request:**
+
+```sh
+curl -X GET http://localhost:8080/contacts \
+  -H "Content-Type: application/json" 
+```
+
+#### GET /contacts/:id
+**Description:** Gets contact infoby id.
+
+**Response:**
+
+- `200 OK`: Fetched contact info
+
+**Example Request:**
+
+```sh
+curl -X GET http://localhost:8080/contacts/1 \
+  -H "Content-Type: application/json" 
+```
+
+
+#### PUT /contacts/:id
+**Description:** Updates contact info
+
+**Request Body:**
+
+```json
+{
+  "full_name": "string",
+  "email": "string (optional)",
+  "phone_numbers": ["string"]
+}
+```
+
+**Response:**
+
+- `200 Ok`: When the contact is successfully updated.
+- `400 Bad Request`: When the request data is invalid.
+
+**Example Request:**
+
+```sh
+curl -X PUT http://localhost:8080/contacts/1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "full_name": "Alex Bell",
+    "email": "alex@bell-labs.com",
+    "phone_numbers": ["03 8578 6688", "1800728069"]
+  }'
+```
+
+#### DELETE /contacts/:id
+**Description:** Deletes a contact.
+
+**Response:**
+
+- `200 OK`: When the contact is successfully created.
+- `400 Bad Request`: When the request data is invalid.
+
+**Example Request:**
+
+```sh
+curl -X DELETE http://localhost:8080/contacts/1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "full_name": "Alex Bell",
+    "email": "alex@bell-labs.com",
+    "phone_numbers": ["03 8578 6688", "1800728069"]
+  }'
+```
+
 ## Assumptions
 - Data Validation: Implementations should handle invalid data gracefully.
-- Database: Use a relational database of your choice to persist the data.
+- Database: Used postgresql
+- Docker: used docker for containerization of database
+
+## Design Thoughts
+- Used regexp at first for phone number validation and normalizing into E.164 format.
+- Deprecated regexp and used github.com/ttacon/libphonenumber package for validation. I thought it would be better to use the library as its more reliable its a fork of google's phone number validator.
+- Used a provider to easily switch between regexp and libphonenumber if needed
+- Created a service layer that handles database operations separate from controller methods
+
 
 ## Tests
-Include any relevant tests to ensure the API behaves as expected.
+    ```sh
+    go test ./... -v
+    ```
+Test is included in the services folder
 
 ## Future Improvements
 - Error Handling: Improve error handling and validation messages.
 - Authentication: Add authentication and authorization if needed.
-- Performance: Optimize performance for larger datasets.
+- CI/CD Deployment - Fix Docker setup and Procfile for Heroku distribution
+- Documentation - Implement API documentation via swaggo/swag package
 
 ## Getting Started
 
@@ -143,5 +234,3 @@ Include any relevant tests to ensure the API behaves as expected.
 5. **Use the API as described above.**
 
 ---
-
-Feel free to update the `<repository_url>` and `<project_directory>` placeholders with the actual repository URL and project directory name respectively.

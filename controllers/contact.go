@@ -38,7 +38,7 @@ func CreateContact(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"data": contact})
+	c.JSON(http.StatusCreated, gin.H{"data": contact})
 }
 
 func GetContacts(c *gin.Context) {

@@ -1,1 +1,1 @@
-web: ./tsa
+web: ./tmp/main

@@ -185,6 +185,7 @@ curl -X DELETE http://localhost:8080/contacts/1 \
 - Data Validation: Implementations should handle invalid data gracefully.
 - Database: Used postgresql
 - Docker: used docker for containerization of database
+- Added Bruno API collection (this is like postman, visit https://www.usebruno.com/ for more info)
 
 ## Design Thoughts
 - Used regexp at first for phone number validation and normalizing into E.164 format.

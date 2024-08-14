@@ -1,0 +1,29 @@
+meta {
+  name: Create Contact
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{protocol}}{{host}}{{port}}/contacts
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "fullname": "Kay Singian",
+    "email": "singiankay@gmail.com",
+    "phone_numbers": [
+      {
+        "number": "03 8578 6688"
+      },
+      {
+        "number": "1800728069"
+      },
+      {
+        "number": "+61488224568"
+      }
+    ]
+  }
+}

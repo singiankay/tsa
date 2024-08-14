@@ -1,0 +1,23 @@
+meta {
+  name: Update Contact By ID
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{protocol}}{{host}}{{port}}/contacts/1
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "full_name": "Kay Singian 2",
+    "phone_numbers": [
+      "03 8578 6688",
+      "1800728069",
+      "+61488224568",
+      "61488224568"
+    ]
+  }
+}
